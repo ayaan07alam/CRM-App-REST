@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Animate CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <!-- Gradient Background Animation -->
+    <style>
+      body {
+        background: linear-gradient(to right, #d9a7c7, #fff);
+        animation: gradient 15s ease infinite;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+    </style>
+
+    <!-- Table Row Hover Transitions -->
+    <style>
+      .table td,
+      .table th {
+        transition: padding 0.2s ease;
+      }
+
+      .table tr:hover {
+        background: #eee;
+      }
+
+      .table th {
+        background-color: #9933ff;
+        color: #ffffff;
+      }
+    </style>
+
+    <!-- Heading Animation -->
+    <style>
+      h3 {
+        animation: heading 3s;
+      }
+
+      @keyframes heading {
+        from {
+          transform: rotateX(-90deg);
+          opacity: 0;
+        }
+        to {
+          transform: rotateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* Beautify the Heading */
+      .header-container {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .header-title {
+        font-family: "Arial", sans-serif;
+        font-size: 2.5em;
+        color: #9933ff;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+      }
+
+      .header-subtitle {
+        font-size: 1.2em;
+        color: #555;
+      }
+
+      /* Beautify the Add Employee button */
+      .add-employee-btn {
+        background-color: #6f42c1;
+        color: #ffffff;
+        border-radius: 30px; /* Increased border-radius for a slightly rounder button */
+        padding: 12px 24px; /* Adjusted padding for a larger button */
+        font-size: 1.2em; /* Increased font size for better visibility */
+        transition: background-color 0.3s ease;
+      }
+
+      .add-employee-btn:hover {
+        background-color: #533c8c;
+      }
+    </style>
+
+    <!-- New Styles -->
+    <style>
+      .table {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 10px #ddd;
+      }
+
+      .btn {
+        border-radius: 25px;
+      }
+
+      .action-buttons form {
+        display: inline; /* Keeps the forms on the same line */
+        margin-right: 5px; /* Adjust spacing between buttons */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container animated fadeIn">
+      <!-- Original Content -->
+      <div class="header-container">
+        <h3 class="header-title">Employee Directory</h3>
+        <p class="header-subtitle">Manage your employee records efficiently.</p>
+      </div>
+
+      <div class="text-right">
+        <!-- Added text-right class to align button to the right -->
+        <a
+          th:href="@{/employees/showFormForAdd}"
+          class="btn btn-primary btn-sm mb-3 add-employee-btn"
+        >
+          Add Employee
+        </a>
+      </div>
+
+      <table class="table table-bordered table-striped mt-3">
+        <thead class="bg-violet">
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="tempEmployee : ${employees}">
+            <td th:text="${tempEmployee.firstName}"></td>
+            <td th:text="${tempEmployee.lastName}"></td>
+            <td th:text="${tempEmployee.email}"></td>
+
+            <!-- Update Form -->
+            <td class="action-buttons">
+              <form th:action="@{/employees/showFormForUpdate}" method="POST">
+                <input
+                  type="hidden"
+                  name="employeeId"
+                  th:value="${tempEmployee.id}"
+                />
+                <button class="btn btn-warning" type="submit">Update</button>
+              </form>
+
+              <!-- Delete Form -->
+              <form th:action="@{/employees/delete}" method="POST">
+                <input
+                  type="hidden"
+                  name="employeeId"
+                  th:value="${tempEmployee.id}"
+                />
+                <button
+                  class="btn btn-danger"
+                  type="submit"
+                  onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false"
+                >
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
