@@ -25,7 +25,7 @@ Before running the application, make sure you have the following installed:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/crm-application.git
+   git clone https://github.com/ayaan07alam/CRM-App-REST.git
    cd crm-application
 
 2. Configure MySQL Database:
