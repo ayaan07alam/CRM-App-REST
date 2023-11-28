@@ -3,7 +3,8 @@
 ## Overview
 
 This is a Customer Relationship Management (CRM) application built using Spring Boot, Thymeleaf, Spring Security, and MySQL. It provides a platform for managing customer interactions, tracking leads, and maintaining customer information.
-![image](https://github.com/ayaan07alam/CRM-App-REST/assets/77435615/45cbbe3a-cc14-4c62-90ab-4c2e39f6a378)
+![image](https://github.com/ayaan07alam/CRM-App-REST/assets/77435615/ef9f564f-f247-4bc0-b201-1eef8e6565c1)
+
 
 ## Features
 
